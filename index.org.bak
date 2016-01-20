@@ -1,0 +1,718 @@
+# http://thomasf.github.io/solarized-css/
+# http://www.seas.upenn.edu/~heqin/academic/sitecreation.html
+
+#+SETUPFILE: css/level-0.orgcss
+#+HTML: <script src="js/bootstrap.min.js"></script>
+#+STARTUP: content
+
+# #+OPTIONS:     H:2 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t
+#+OPTIONS: html-postamble:t
+#+OPTIONS: date:t
+#+BIND: org-html-postamble-format
+# #+BIND: org-export-with-date
+#+TITLE: Blogging at JYU
+
+
+
+Please check HELP for keyboard shortcuts. Many of them are emacs shortcuts (ie, =p=, =n= for /previous/ and /next/ page respectively).  In order to toggle view press =m=.
+
+
+* Unix                                                            :unix:bash:
+
+** Create a =gif= from =pdf=
+- http://feedworld.net/toc/
+
+#+BEGIN_SRC shell
+convert -density 300 \
+-delay 300 "file.pdf[0-3]" \
+-delay 100 "file.pdf[4-21]" \
+-delay 500 "file.pdf[22]" \
+test.gif
+#+END_SRC
+** Convert avi to mp4
+#+BEGIN_SRC sh
+ffmpeg -i input.avi -c:v libx264 -preset slow -crf 22 -c:a libfaac -b:a 128k output.mp4
+#+END_SRC
+
+** Make png from mp4
+#+BEGIN_SRC sh
+ffmpeg -i video.mp4 -r 10 ./frames/frame%03d.png
+#+END_SRC
+
+*** Assemble the gif from png
+- create an animated GIF image with 20 frames-per-second and infinite loop
+#+BEGIN_SRC sh
+convert -delay 1x20 -loop 0 out*.gif animation.gif
+#+END_SRC
+
+* Python                                                        :programming:
+  :PROPERTIES:
+  :DATE:     2015-06-21
+  :END:
+
+** Learning python the hard way                                      :python:
+   :PROPERTIES:
+   :DATE:     2015-06-21
+   :END:
+/Learning python the hard way/ is a tutorial for python.  The online version of the book is [[http://learnpythonthehardway.org/book][here]].
+
+*** Exercise 1                                                 :python:babel:
+    :PROPERTIES:
+    :DATE:     2015-06-21
+    :END:
+- http://learnpythonthehardway.org/book/ex1.html
+Simple printing commands of strings.  The following example is implemented for orgmode babel multi-language environment.
+
+
+#+BEGIN_EXAMPLE
+
+#+BEGIN_SRC python :results output
+print "Hello World!"
+print "Hello Again"
+print "I like typing this."
+print "This is fun."
+print 'Yay! Printing.'
+print "I'd much rather you 'not'."
+print 'I "said" do not touch this.'
+#+END_SRC
+
+#+RESULTS:
+: Hello World!
+: Hello Again
+: I like typing this.
+: This is fun.
+: Yay! Printing.
+: I'd much rather you 'not'.
+: I "said" do not touch this.
+
+#+END_EXAMPLE
+
+*** Exercise 2                                                 :python:babel:
+    :PROPERTIES:
+    :DATE:     2015-06-21
+    :END:
+Inserting comments in your code.  Comments are useful in order to be able to read your programs afterwards.
+
+
+#+BEGIN_EXAMPLE
+
+#+BEGIN_SRC python :results output
+# A comment, this is so you can read your program later.
+# Anything after the # is ignored by python
+
+print "I could have code like this." # and the comment after is ignored
+
+# You can also use a comment to "disable" or comment out a piece of code:
+# print "This won't run"
+
+print "This will run."
+#+END_SRC
+
+#+RESULTS:
+: I could have code like this.
+: This will run.
+
+
+#+END_EXAMPLE
+
+*** Exercise 3                                                 :python:babel:
+    :PROPERTIES:
+    :DATE:     2015-06-21
+    :END:
+Simple math expressions in ~python~.
+
+
+#+BEGIN_EXAMPLE
+
+#+BEGIN_SRC python :results output
+# ex3.py
+print "I will now count my chickens:"
+# arithmetic precedence - similar to sc3
+# PEMDAS (Parens Exponents Multi Div Add Sub)
+print "Hens", 25 + 30 / 6
+print "Roosters", 100-25 * 3 % 4
+# empty lines in code does not affect output
+print "Now I will count the eggs:"
+# no floating point
+print 3 + 2 + 1 - 5 + 4 % 2 - 1 / 4 + 6
+
+print "Is it true that 3 + 2 < 5 - 7?"
+# a boolean expression
+print 3 + 2 < 5 -7
+
+print "What is 3 + 2?", 3 + 2
+print "What is 5 - 7?", 5 - 7
+
+print "Oh, that's why it's False."
+
+print "How about some more."
+
+print "Is it greater?", 5 > -2
+print "Is it greater or equal?", 5 >= -2
+print "Is it less or equal?", 5 <= -2
+
+# floating point
+print 20.0 / 3
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+I will now count my chickens:
+Hens 30
+Roosters 97
+Now I will count the eggs:
+7
+Is it true that 3 + 2 < 5 - 7?
+False
+What is 3 + 2? 5
+What is 5 - 7? -2
+Oh, that's why it's False.
+How about some more.
+Is it greater? True
+Is it greater or equal? True
+Is it less or equal? False
+6.66666666667
+#+end_example
+
+
+#+END_EXAMPLE
+
+*** Exercise 4                                                 :python:babel:
+    :PROPERTIES:
+    :DATE:     2015-06-21
+    :END:
+Simple variables.
+
+#+BEGIN_EXAMPLE
+
+#+BEGIN_SRC python :results output
+cars = 100
+space_in_a_car = 4.0
+drivers = 30
+passengers = 90
+cars_not_driven = cars - drivers
+cars_driven = drivers
+carpool_capacity = cars_driven * space_in_a_car
+average_passengers_per_car = passengers / cars_driven
+
+print "These are", cars, "cars available."
+print "There are only", drivers, "drivers available."
+print "There will be", cars_not_driven, "empty cars today."
+print "We can transport", carpool_capacity, "people today."
+print "We have", passengers, "to carpool today."
+print "We need to put about", average_passengers_per_car, "in each car."
+
+#+END_SRC
+
+#+RESULTS:
+: These are 100 cars available.
+: There are only 30 drivers available.
+: There will be 70 empty cars today.
+: We can transport 120.0 people today.
+: We have 90 to carpool today.
+: We need to put about 3 in each car.
+
+
+#+END_EXAMPLE
+
+*** Exercise 5                                                 :python:babel:
+    :PROPERTIES:
+    :DATE:     2015-06-21
+    :END:
+Calling variables in stings.  Specifically, variables which contain strings (=%s=) and variables which contain decimal numbers (=%d=).
+
+#+BEGIN_EXAMPLE
+#+BEGIN_SRC python :results output
+my_name = 'Zed A. Shaw'
+my_age = 35 # not a lie
+my_height = 74 # inches
+my_weight = 180 # lbs
+my_eyes = 'Blue'
+my_teeth = 'White'
+my_hair = 'Brown'
+# %s is assigning a string
+# 'Zed A. Shaw' is the content of the variable 'my_name'
+print "Let's talk about %s." % my_name
+print "He's %d inches tall." % my_height
+print "He's %d pounds heavy." % my_weight
+print "Actually that's not too heavy."
+print "He's got %s eyes and %s hair." % (my_eyes, my_hair)
+print "His teeth are usually %s depending on the coffee." % my_teeth
+
+# this line is tricky, try to get it exactly right
+print "If I add %d, %d, and %d I get %d." % (
+    my_age, my_height, my_weight, my_age + my_height + my_weight)
+
+#+END_SRC
+
+#+RESULTS:
+: Let's talk about Zed A. Shaw.
+: He's 74 inches tall.
+: He's 180 pounds heavy.
+: Actually that's not too heavy.
+: He's got Blue eyes and Brown hair.
+: His teeth are usually White depending on the coffee.
+: If I add 35, 74, and 180 I get 289.
+
+
+#+END_EXAMPLE
+
+- =%r= in another [[https://docs.python.org/2.4/lib/typesseq-strings.html][string formatting operator]] which is based on =repr()= module, and stands for object representation.  It is used for debugging.  I am thinking of python quines using this.
+
+
+#+BEGIN_SRC python
+# I am not sure why in this case the second backslash is added
+repr1 = "\%r"
+repr2 = "\\r"
+print "This is an object representation %r" % repr1
+print "Also this is an object representation %r" % repr2
+#+END_SRC
+
+
+#+BEGIN_EXAMPLE
+
+#+BEGIN_SRC python :results output
+# I am not sure why in this case the second backslash is added
+repr1 = "\%r"
+repr2 = "\\%r"
+print "This is an object representation %r" % repr1
+print "Also this is an object representation %r" % repr2
+#+END_SRC
+
+#+RESULTS:
+: This is an object representation '\\%r'
+: Also this is an object representation '\\%r'
+
+#+END_EXAMPLE
+
+#+BEGIN_SRC python :results output
+# I am not sure why in this case the second backslash is added
+repr1 = "\%s"
+repr2 = "\\%s"
+print "This is an object representation %r" % repr1
+print "Also this is an object representation %r" % repr2
+#+END_SRC
+
+#+RESULTS:
+: This is an object representation '\\%s'
+: Also this is an object representation '\\%s'
+
+#+BEGIN_SRC python :results output
+output_str = """
+\%r \%s
+\\%r \\%s
+\\\%r \\\%s
+"""
+print output_str
+#+END_SRC
+
+#+RESULTS:
+:
+: \%r \%s
+: \%r \%s
+: \\%r \\%s
+:
+
+*** Exercise 6                                                 :python:babel:
+    :PROPERTIES:
+    :DATE:     2015-06-21
+    :END:
+
+I am the same org-switches as in the examples above (ie. =:results output=).
+#+BEGIN_SRC python :results output
+x = "There are %d types of people." % 10
+binary = "binary"
+do_not = "don't"
+# printing two variables using tuples
+y = "Those who know %s and those who %s." % (binary, do_not)
+
+print x
+print y
+
+print "I said: %r." % x
+print "I also said: '%s'." % y
+
+hilarious = False
+joke_evaluation = "Isn't that joke so funny?! %r"
+
+print joke_evaluation % hilarious
+
+w = "This is the left side of ..."
+e = "a string with a right side."
+
+print w + e
+
+#+END_SRC
+
+Babel results below:
+#+BEGIN_EXAMPLE
+#+RESULTS:
+: There are 10 types of people.
+: Those who know binary and those who don't.
+: I said: 'There are 10 types of people.'.
+: I also said: 'Those who know binary and those who don't.'.
+: Isn't that joke so funny?! False
+: This is the left side of ...a string with a right side.
+
+#+END_EXAMPLE
+
+*** Exercise 7                                                 :python:babel:
+Printing commands and string multiplication.  Also the backslash =\= character introduced for lines that exceeds 80 chars length.
+
+#+BEGIN_SRC python :results output
+print "Mary had a little lamb."
+print "Its fleece was white as %s." % 'snow'
+print "And everywhere that Mary went."
+print "." * 10 # what that do?
+
+end1 = "C"
+end2 = "h"
+end3 = "e"
+end4 = "e"
+end5 = "s"
+end6 = "e"
+end7 = "B"
+end8 = "u"
+end9 = "r"
+end10 = "g"
+end11 = "e"
+end12 = "r"
+
+# watch that comma at the end.  try removing it to see what happens
+# print end1 + end2 + end3 + end4 + end5 + end6,
+# print end7 + end8 + end9 + end10 + end11 + end12
+# backslash change line
+# there is 80 chars limit in python
+print end1 + end2 + end3 + end4 + end5 + end6, \
+end7 + end8 + end9 + end10 + end11 + end12
+
+#+END_SRC
+
+The output in babel:
+
+#+BEGIN_EXAMPLE
+#+RESULTS:
+: Mary had a little lamb.
+: Its fleece was white as snow.
+: And everywhere that Mary went.
+: ..........
+: Cheese Burger
+
+#+END_EXAMPLE
+
+*** Exercise 8                                                 :python:babel:
+Formatting a string.
+
+#+BEGIN_SRC python :results output
+formatter = "%r %r %r %r"
+
+print formatter % (1, 2, 3, 4)
+print formatter % ("one", "two", "three", "four")
+print formatter % (True, False, False, True)
+print formatter % (
+  "I had this thing.",
+  "That you could type up right.",
+  "But it didn't sign.",
+  "So I said goodnight."
+)
+#+END_SRC
+
+Babel output:
+#+BEGIN_EXAMPLE
+#+RESULTS:
+: 1 2 3 4
+: 'one' 'two' 'three' 'four'
+: True False False True
+: 'I had this thing.' 'That you could type up right.' "But it didn't sign." 'So I said goodnight.'
+#+END_EXAMPLE
+
+All the strings have been printed with single quotes except the third string.  That's because it contains an apostrophe (single quote).
+
+Quotes from the book:
+#+BEGIN_QUOTE
+Python is going to print the strings in the most efficient way it can...
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+The %r will give you the "raw programmer's" version of variable, also known as the "representation."
+#+END_QUOTE
+
+*** Exercise 9                                                 :python:babel:
+#+BEGIN_SRC python :results output
+# Here's some new strange stuff
+
+days = "Mon Tue Wed Thu Fri Sat Sun "
+months ="Jan\nFeb\nMar\nApr\nMay\nJun\nJul\nAug"
+
+print "Here are the days: ", days
+print "Here are the months: ",months
+# triple-quotes are for printing code blocks.
+print """
+There's something going on here.
+With the three double-quotes.
+We'll be able to type as much aswe like.
+Even  4 lines if we want, or 5, or 6.
+"""
+#+END_SRC
+
+In this case Babel printed =#+begin_example= on it's own??
+
+#+RESULTS:
+#+begin_example
+Here are the days:  Mon Tue Wed Thu Fri Sat Sun
+Here are the months:  Jan
+Feb
+Mar
+Apr
+May
+Jun
+Jul
+Aug
+
+There's something going on here.
+With the three double-quotes.
+We'll be able to type as much aswe like.
+Even  4 lines if we want, or 5, or 6.
+
+#+end_example
+
+*** Exercise 10                                                :python:babel:
+
+#+BEGIN_SRC python :results output
+print "I am 6'2\" tall." # escape double quotes
+print 'I am 6\'2" tall.' # escape single quote
+#+END_SRC
+
+Babel output:
+
+#+BEGIN_EXAMPLE
+#+RESULTS:
+: I am 6'2" tall.
+: I am 6'2" tall.
+
+#+END_EXAMPLE
+
+#+BEGIN_SRC python :results output
+tabby_cat = "\tI am a tabbed cat."
+persian_cat = "I'm split\non a line."
+backslash_cat = "I'm \\ a \\ cat."
+
+fat_cat ="""
+I'll do a list:
+\t* Cat food
+\t* Fishies
+\t* Catnip\n\t* Grass
+"""
+
+print tabby_cat
+print persian_cat
+print backslash_cat
+print fat_cat
+#+END_SRC
+
+
+Again babel imports =#+begin_example= automatically below the =#+RESULTS:=, I suppose it has to do with the triple quotes.
+
+#+RESULTS:
+#+begin_example
+	I am a tabbed cat.
+I'm split
+on a line.
+I'm \ a \ cat.
+
+I'll do a list:
+	* Cat food
+	* Fishies
+	* Catnip
+	* Grass
+
+#+end_example
+
+
+#+BEGIN_QUOTE
+Escape Sequences
+
+This all of the escape sequences Python supports. You may not use many of these, but memorize their format and what they do anyway. Try them out in some strings to see if you can make them work.
+Escape 	What it does.
+| \\         | Backslash ()                                                |
+| \'         | Single-quote (')                                            |
+| \"         | Double-quote (")                                            |
+| \a         | ASCII bell (BEL)                                            |
+| \b         | ASCII backspace (BS)                                        |
+| \f         | ASCII formfeed (FF)                                         |
+| \n         | ASCII linefeed (LF)                                         |
+| \N{name}   | Character named name in the Unicode database (Unicode only) |
+| \r ASCII   | Carriage Return (CR)                                        |
+| \t ASCII   | Horizontal Tab (TAB)                                        |
+| \uxxxx     | Character with 16-bit hex value xxxx (Unicode only)         |
+| \Uxxxxxxxx | Character with 32-bit hex value xxxxxxxx (Unicode only)     |
+| \v         | ASCII vertical tab (VT)                                     |
+| \ooo       | Character with octal value ooo                              |
+| \xhh       | Character with hex value hh                                 |
+
+#+END_QUOTE
+
+
+while True:
+    for i in ["/","-","|","\\","|"]:
+        print "%s\r" % i,
+#+END_SRC
+
+*** Exercise 11
+This gets input from the CLI, so I don't think so that it is possible to run this in babel.  I have attached org-switches =:results silent=.
+
+#+BEGIN_SRC python :results silent
+print "How old are you?",
+age = raw_input()
+print "How tall are you?",
+height = raw_input()
+print "How much do you weigh?",
+weight = raw_input()
+
+print "So, you're %r old, %r tall and %r heavy." % (
+    age, height, weight)
+#+END_SRC
+
+Quote from the book:
+#+BEGIN_QUOTE
+The input() function will try to convert things you enter as if they were Python code, but it has security problems so you should avoid it.
+#+END_QUOTE
+
+*** Exercise 12                                                :python:babel:
+I don't think that =:results silent= actually works for python.
+
+#+BEGIN_SRC python :results silent
+age = raw_input("How old are you? ")
+height = raw_input("How tall are you? ")
+weight = raw_input("How muh do you weight? ")
+
+print "So, you 're %r old, %r tall and %r heavy." % (age, height, weight)
+#+END_SRC
+
+Get python help.
+
+#+BEGIN_EXAMPLE
+#+BEGIN_SRC sh
+pydoc raw_input
+#+END_SRC
+
+#+RESULTS:
+: no Python documentation found for 'raw_input'
+#+END_EXAMPLE
+
+*** Exercise 13                                                :python:babel:
+The =argv= is the /argument variable/.  I have assign this switch =:file ex_13_script first 2nd 3rd= but I do not get what I expect.  Run this is command line.
+
+
+#+BEGIN_SRC python :file ex_13_script first 2nd 3rd
+from sys import argv
+
+script, first, second, third = argv
+
+print "The script is called: ", script
+print "The first variable is: ", first
+print "The second variable is: ", second
+print "The third variable is: ", third
+#+END_SRC
+
+#+RESULTS:
+[[file:ex_13_script first 2nd 3rd]]
+
+**** Example with =argv= and =raw_input=
+
+It does not works.
+#+BEGIN_SRC python
+from sys import argv
+
+script, first, second, third = argv
+
+# agree = raw_input("Do you agree? ")
+# agree = raw_input()
+
+print "The script is called: ", script
+print "Do you agree? ",
+agree = raw_input()
+print "The first variable is: ", first
+print "The second variable is: ", second
+print "The third variable is: ", third
+
+age = raw_input("How old are you? ")
+print "\\n" % ( agree )
+#+END_SRC
+
+*** Exercise 14
+
+#+BEGIN_SRC python
+from sys import argv
+
+script, user_name = argv
+prompt = '[PLZ answer to me]> '
+
+print "Hi %s, I'm the %s script." % (user_name, script)
+print "I'd like to ask you a few questions."
+print "Do you like me %s?" % user_name
+likes = raw_input(prompt)
+
+print "Where do you live %s?" % user_name
+lives = raw_input(prompt)
+
+print "What kind of computer do you have?"
+computer = raw_input(prompt)
+
+print """
+Alright, so you said %r about liking me.
+You live in %r. Not sure where that is.
+And you have a %r computer. Nice.
+""" % (likes, lives, computer)
+#+END_SRC
+
+*** Exercise 15                                                      :python:
+#+BEGIN_SRC python :results output
+filename = open('file')
+print id(filename)
+# assign to the 'text' variable the var 'filename'
+text = filename
+# print the id of the filename
+print id( filename )
+# compare for identity
+print "Is 'filename' identical to 'text'"
+filename == text
+print "What about the ids'"
+id(filename) == id(text)
+# get the dir of 'filename' (attribute and methods)
+dir(filename)
+#+END_SRC
+
+#+BEGIN_SRC python
+>>> txt = open('file')
+>>>
+>>> txt.read()
+'1st line\n'
+>>> text = txt
+>>> text.read()
+''
+>>> txt.read()
+''
+>>> id(txt)
+140604656407584
+>>> id(text\)
+  File "<stdin>", line 1
+    id(text\)
+            ^
+SyntaxError: unexpected character after line continuation character
+>>> id(text)
+140604656407584
+>>>
+
+
+
+
+#+END_SRC
+
+** Test babel
+#+BEGIN_SRC python :results value
+return  eval ( eval ( eval ( eval ( '%r'.__repr__() ).__repr__()).__repr__()).__repr__())
+#+END_SRC
+
+#+RESULTS:
+: %r

@@ -1,0 +1,427 @@
+ # http://thomasf.github.io/solarized-css/
+# http://www.seas.upenn.edu/~heqin/academic/sitecreation.html
+
+#+SETUPFILE: css/level-0.orgcss
+#+HTML: <script src="js/bootstrap.min.js"></script>
+#+STARTUP: content
+
+# #+OPTIONS:     H:2 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t
+#+OPTIONS: ^:nil
+#+OPTIONS: html-postamble:t
+#+OPTIONS: date:t
+#+BIND: org-html-postamble-format
+# #+BIND: org-export-with-date
+#+TITLE: Blogging at JYU
+
+
+
+Please check HELP for keyboard shortcuts. Many of them are emacs shortcuts (ie, =p=, =n= for /previous/ and /next/ page respectively).  In order to toggle view press =m=.
+
+
+* Arch linux                                                           :arch:
+** Install and remove packages
+#+BEGIN_SRC sh :results silent
+# sync packages
+pacman -Syy
+# download to local disk
+pacman -Syuvw
+# make update from local disk
+pacman -Suv
+#+END_SRC
+
+*** More commands
+#+BEGIN_EXAMPLE
+    4  pacman -Syy
+    5  pacman -Syuvw
+    6  pacman -Suv
+    7  pacman -Qdt
+    8  pacman -Qdt | tr '\n' ' '
+    9  pacman -Qdt | awk '{print $1}' | tr '\n' ' ' | awk '{print "pacman -Rncs " $0}'
+   10  pacman -Qdt | awk '{print $1}' | tr '\n' ' ' | awk '{print "pacman -Rncs " $0}'  | sh -x
+   11  pacman -Qdt | awk '{print $1}' | tr '\n' ' ' | awk '{print "pacman -Rncs --noconfirm " $0}'  | sh -x
+   12  pacman -Scc
+   13  pacman -Scc
+   14  pacman -Syy
+   15  pacman -Qdt
+   16  pacman -Suvw
+   17  pacman -Syuvw
+   18  pacman -Qdttq
+# Remove packages
+   19  pacman -Rncs dialog x264
+   20  pacman -Qdt
+   21  pacman -Q x265
+   22  pacman -Qi x265
+   23  pacman -Qem
+   24  pacman -Qem | awk '{print $1}' | grep -v arduino | tr '\n' ' ' | awk '{print "pacman -Rncs --noconfirm "$0}'
+   25  pacman -Qem | awk '{print $1}' | grep -v arduino | tr '\n' ' ' | awk '{print "pacman -Rncs --noconfirm "$0}' | sh -x
+   26  pacman -Ss libreoffice
+   27  pacman -Ss libreoffice-calc
+   28  pacman -Ss libreoffice | more
+   29  pacman -Ss libreoffice calc
+   30  pacman -Ss calc
+   31  pacman -Ss calc | grep libre
+   32  pacman -Ss jsoncpp
+   33  pacman -S jsoncpp
+   34  pacman -Rncs jsoncpp
+   35  pacman -Scc
+   36  df
+   37  sync
+   38  sync
+#+END_EXAMPLE
+
+** PKGBUILD files
+- They are located in =/var/abs/=
+** Building AUR packages
+#+BEGIN_SRC :results silent
+505  wget https://aur.archlinux.org/packages/rs/rstudio-server-git/rstudio-server-git.tar.gz
+  506  tar xf rstudio-server-git.tar.gz
+  507  cd rstudio-server-git/
+  508  ls
+  509  makepkg
+  510  vim PKGBUILD
+  511  vim PKGBUILD
+  512  makepkg
+  # Install a 'local' package that is not from a remote repository (e.g. the package is from the AUR):
+  pacman -U /path/to/package/package_name-version.pkg.tar.xz
+#+END_SRC
+* Unix
+
+** Create a =gif= from =pdf=                                      :unix:bash:
+   :PROPERTIES:
+   :DATE:     28-09-2015
+   :END:
+- http://feedworld.net/toc/
+
+#+BEGIN_SRC sh :results silent
+convert -density 300 \
+-delay 300 "file.pdf[0-3]" \
+-delay 100 "file.pdf[4-21]" \
+-delay 500 "file.pdf[22]" \
+test.gif
+#+END_SRC
+** Convert avi to mp4                                             :unix:bash:
+   :PROPERTIES:
+   :DATE:     28-09-2015
+   :END:
+#+BEGIN_SRC sh :results silent
+ffmpeg -i input.avi -c:v libx264 -preset slow -crf 22 -c:a libfaac -b:a 128k output.mp4
+#+END_SRC
+
+** Make png from mp4                                              :unix:bash:
+   :PROPERTIES:
+   :DATE:     28-09-2015
+   :END:
+#+BEGIN_SRC sh :results silent
+ffmpeg -i video.mp4 -r 10 ./frames/frame%03d.png
+#+END_SRC
+
+*** Assemble the gif from png
+- create an animated GIF image with 20 frames-per-second and infinite loop
+#+BEGIN_SRC sh :results silent
+convert -delay 1x20 -loop 0 frame*.png animation.gif
+#+END_SRC
+
+** A =grep= tutorial
+- https://www.digitalocean.com/community/tutorials/using-grep-regular-expressions-to-search-for-text-patterns-in-linux
+* Videos, podcasts
+
+** NASA announced water on Mars                         :podcast:reddit:nasa:
+   :PROPERTIES:
+   :DATE:     29-09-2015
+   :END:
+- Reddit thread: https://www.reddit.com/r/IAmA/comments/3mq1wl/were_nasa_mars_scientists_ask_us_anything_about/
+  - Video of the announcement available here: http://www.jpl.nasa.gov/news/news.php?feature=4722
+
+** BBC Radio, J. Sloboda & I. Cross       :podcast:bbc:music:emotion:origins:
+   :PROPERTIES:
+   :DATE: 29-09-2015
+   :END:
+Two radio shows about Music & Emotions, and the origins of music.
+- http://www.bbc.co.uk/programmes/b06db6tv
+- http://www.bbc.co.uk/programmes/b06b8q6y
+** Biocomputer music                               :video:music:bio:computer:
+#+HTML: <iframe src="https://player.vimeo.com/video/111409050" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/111409050">Biocomputer Music</a> from <a href="https://vimeo.com/user15234038">Eduardo Miranda</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+** Tar - Turkish music                              :video:music:traditional:
+#+HTML: <iframe width="560" height="315" src="https://www.youtube.com/embed/IxT6mkoyKY8" frameborder="0" allowfullscreen></iframe>
+** Ustad Khan - Raga Gunkali                        :video:music:traditional:
+#+HTML: <iframe width="420" height="315" src="https://www.youtube.com/embed/VE78CWP65rg" frameborder="0" allowfullscreen></iframe>
+** Alex McLean                                         :video:music:livecode:
+- Live coding a XEROX dot matrix
+#+HTML: <iframe width="420" height="315" src="https://www.youtube.com/watch?v=TMrv_wEFdqE" frameborder="0" allowfullscreen></iframe>
+
+** Noam Chomsky                                               :video:chomsky:
+*** The machine, the ghost, and the limits of understanding
+- https://www.youtube.com/watch?v=D5in5EdjhD0
+
+#+HTML: <iframe width="560" height="315" src="https://www.youtube.com/embed/D5in5EdjhD0" frameborder="0" allowfullscreen></iframe>
+
+** Noam Elkies                                            :video:maths:music:
+- https://www.youtube.com/watch?v=_CEKPazA_bk
+
+#+BEGIN_HTML
+<iframe width="420" height="315" src="https://www.youtube.com/embed/_CEKPazA_bk" frameborder="0" allowfullscreen></iframe>
+#+END_HTML
+
+* Academic publications
+  :PROPERTIES:
+  :DATE:     29-09-2015
+  :END:
+** Proceedings
+*** CMMR2015                                                  :research:cmmr:
+- http://cmr.soc.plymouth.ac.uk/cmmr2015/proceedings.pdf
+*** ICMC                                                      :research:icmc:
+- http://quod.lib.umich.edu/i/icmc/
+* Articles
+** Google's quibit                                                   :google:
+- http://www.wired.com/2015/09/googles-quantum-computer-just-got-a-big-upgrade-1000-qubits/?mbid=social_fb
+* Hard sciences
+** Mathematics                                                        :maths:
+*** Tao's proof                                   :maths:video:number_theory:
+Tao proves Erdos discrepancy problem.
+- http://www.nature.com/news/maths-whizz-solves-a-master-s-riddle-1.18441?WT.mc_id=TWT_NatureNews
+#+HTML: <iframe width="560" height="315" src="https://www.youtube.com/embed/8EAcqluFtF8" frameborder="0" allowfullscreen></iframe>
+* Google
+** Project SOLI                                             :google:gestures:
+A hi-tech device for gesture recognition.  They refer to /gesture archetypes/.
+- https://www.google.com/atap/project-soli/
+
+#+HTML: <iframe width="560" height="315" src="https://www.youtube.com/embed/0QNiZfSsPc0" frameborder="0" allowfullscreen></iframe>
+** Google Talks
+*** Node link graph                                    :google:visualization:
+#+HTML: <iframe width="420" height="315" src="https://www.youtube.com/embed/lDltGVQp8bE" frameborder="0" allowfullscreen></iframe>
+*** Noam Chomsky 2014                                  :google:video:chomsky:
+- https://www.youtube.com/watch?v=Y3PwG4UoJ0Y
+
+#+HTML: <iframe width="560" height="315" src="https://www.youtube.com/embed/Y3PwG4UoJ0Y" frameborder="0" allowfullscreen></iframe>
+*** Noam Chomsky 2008                                  :google:video:chomsky:
+- https://www.youtube.com/watch?v=rnLWSC5p1XE
+
+#+HTML: <iframe width="420" height="315" src="https://www.youtube.com/embed/rnLWSC5p1XE" frameborder="0" allowfullscreen></iframe>
+*** xkcd                                                  :google:video:xkcd:
+- https://www.youtube.com/watch?v=zJOS0sV2a24
+
+#+HTML: <iframe width="420" height="315" src="https://www.youtube.com/embed/zJOS0sV2a24" frameborder="0" allowfullscreen></iframe>
+
+* Music
+
+** MIR
+*** ISMIR paper browser                                  :ISMIR:MIR:research:
+- http://demos.dke-research.de/nemp-paper-explorer/
+
+** Musical gestures
+*** Haten @ Cyber Semiotic Institute                           :music:course:
+Notes of his class online.
+- http://projects.chass.utoronto.ca/semiotics/cyber/hatout.html
+** Music videos                                                :music:videos:
+- CIRMMT channel on youtube: https://www.youtube.com/channel/UC8RzG5Iug2XKANPZ_XUea5A
+* Orgmode                                                           :orgmode:
+** Python in Babel                                     :orgmode:babel:python:
+#+BEGIN_EXAMPLE
+
+#+BEGIN_SRC python :results output
+import sys
+print(sys.version)
+#+END_SRC
+
+#+RESULTS:
+: 2.7.10 (default, May 26 2015, 04:16:29)
+: [GCC 5.1.0]
+
+
+#+END_EXAMPLE
+** Beamer poster                                       :orgmode:babel:beamer:
+Code example from orgmode mailing list.
+- https://lists.gnu.org/archive/html/emacs-orgmode/2015-08/msg00119.html
+Based on =beamerposter= package.
+- https://github.com/deselaers/latex-beamerposter
+# #+ATTR_HTML: :textarea t :width 80
+
+#+BEGIN_EXAMPLE
+
+,#+startup: beamer
+,#+latex_header: \usepackage[orientation=portrait,size=a0,scale=1.4,debug]{beamerposter}
+,#+options: toc:nil num:nil
+,* The poster title
+,** Left column                                                  :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.48
+:END:
+,*** First block                                              :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- first item
+- second item
+- third item
+
+,*** Second block                                             :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- first item
+- second item
+- third item
+,*** Third block                                              :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- first item
+- second item
+- third item
+,** Right column                                                 :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.48
+:END:
+,*** First block                                              :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- first item
+- second item
+- third item
+
+,*** Second block                                             :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- first item
+- second item
+- third item
+,*** Third block                                              :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- first item
+- second item
+- third item
+
+#+END_EXAMPLE
+** Org-beamer presentation                             :orgmode:babel:beamer:
+- =C-c C-e t= : insert template
+  - =?= : to show menu
+  - =#= : to import beamer template
+** Org-bibtex                                          :bibtex:
+- https://vimeo.com/99167082
+* Motion Capture
+** RT mocap for matlab                                         :mocap:matlab:
+- https://sites.google.com/site/rtmocap/home
+- http://www.researchgate.net/publication/274089263_Real-Time_Motion_Capture_Toolbox_%28RTMocap%29_an_open-source_code_for_recording_3-D_motion_kinematics_to_study_actioneffect_anticipations_during_motor_and_social_interactions
+* Sound & Music Applications                                    :music:sound:
+** Audacity
+*** Insert markers (labels) in the waveform
+- =File>Import>Labels=
+- The 1st column is the starting position of the segment, the 2nd the ending position, and the 3rd marker is the label.
+#+BEGIN_EXAMPLE
+0.0074205607476636      6.1574198717949         first
+6.1574198717949         6.6301204301075         second
+6.6301204301075         6.9734475524476         third
+6.9734475524476         7.605865248227          4rth
+7.605865248227          8.0221054766734         5th
+8.0221054766734         8.4458666666667         6th
+8.4458666666667         8.6961289009498         7
+8.6961289009498         8.9270497737557         8
+8.9270497737557         9.4106064908722         9
+9.4106064908722         9.745617921147          10
+9.745617921147          10.310295964126         11
+10.310295964126         10.582975967957         12
+10.582975967957         10.811949290061         13
+10.811949290061         11.013109137056         14
+11.013109137056         11.448662146893         15
+11.448662146893         11.690458064516         16
+11.690458064516         12.046990939977         17
+12.046990939977         12.461276752768         18
+12.461276752768         12.716413602941         19
+12.716413602941         12.957042035398         20
+12.957042035398         13.275035343035         21
+13.275035343035         13.652036036036         22
+13.652036036036         15.158355371901         23
+15.158355371901         15.529294768612         24
+15.529294768612         15.862553505535         25
+15.862553505535         16.206275449102         26
+16.206275449102         16.519161490683         27
+16.519161490683         16.837638938053         28
+16.837638938053         17.211600401606         29
+17.211600401606         17.47560362173          30
+17.47560362173          17.885220356768         31
+17.885220356768         18.176671117358         32
+18.176671117358         18.519722222222         33
+18.519722222222         18.869676258993         34
+18.869676258993         19.297640030441         35
+19.297640030441         19.542548327138         36
+19.542548327138         19.76744765343          37
+19.76744765343          20.255010638298         38
+20.255010638298         20.707124               39
+20.707124               21.278469979296         40
+21.278469979296         21.694623134328         41
+21.694623134328         22.176085956416         42
+22.176085956416         22.396104387292         43
+22.396104387292         22.806451149425         44
+22.806451149425         23.237662621359         45
+23.237662621359         23.503352024922         46
+23.503352024922         26.853181481481         47
+26.853181481481         27.085003257329         48
+27.085003257329         27.622681818182         49
+27.622681818182         28.5156                 50
+28.5156                 28.979046594982         51
+28.979046594982         29.275300835655         52
+29.275300835655         29.733478170478         53
+29.733478170478         30.230527383367         54
+30.230527383367         30.941683018868         55
+30.941683018868         31.47261612515          56
+31.47261612515          31.838098214286         57
+31.838098214286         32.181887850467         58
+32.181887850467         32.527838111298         59
+32.527838111298         32.773433673469         60
+32.773433673469         33.048052747253         s61
+33.048052747253         33.506144417476         62
+33.506144417476         33.912041624365         63
+33.912041624365         34.255544696067         64
+34.255544696067         34.919401847575         65
+34.919401847575         35.55054815864          66
+35.55054815864          36.038557911909         67
+36.038557911909         37.695444219067         68
+37.695444219067         38.017748175182         69
+38.017748175182         38.609789181692         70
+38.609789181692         38.861058823529         71
+38.861058823529         39.234201886792         72
+39.234201886792         39.711253112033         73
+39.711253112033         40.228173824131         74
+40.228173824131         40.638089249493         75
+40.638089249493         41.100056390977         76
+41.100056390977         41.558449255751         77
+41.558449255751         42.080551948052         78
+42.080551948052         42.491792633015         79
+42.491792633015         42.897032454361         80
+42.897032454361         43.349687671233         81
+43.349687671233         44.207471153846         82
+44.207471153846         46.208779291553         83
+46.208779291553         48.576991967871         84
+48.576991967871         49.743215005599         85
+49.743215005599         50.076112970711         86
+50.076112970711         50.757402061856         87
+50.757402061856         54.317210144928         88
+54.317210144928         55.00                   89
+
+#+END_EXAMPLE
+
+#+attr_html: :width 700px
+[[./img/audacity.png]]
+* Tutorials
+** VLFeat.org                                                      :research:
+- http://www.vlfeat.org/
+- Open source library that implements popular computer vision algorithms.  There are some good tutorials in MATLAB.
+* Emacs
+** Emacs - python                                              :emacs:python:
+
+- https://realpython.com/blog/python/emacs-the-best-python-editor/
+** RSS feed                                                       :emacs:rss:
+- https://www.youtube.com/watch?v=t8LOGxYB6xg
+
+#+BEGIN_HTML
+<iframe width="560" height="315" src="https://www.youtube.com/embed/t8LOGxYB6xg" frameborder="0" allowfullscreen></iframe>
+#+END_HTML
+** Emacs git init                                                 :emacs:git:
+- https://www.youtube.com/watch?v=dyWn30HMgQg
+* GPG key
+** Update expired key
+- http://www.g-loaded.eu/2010/11/01/change-expiration-date-gpg-key/
