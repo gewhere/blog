@@ -85,7 +85,21 @@ pacman -Suv
   pacman -U /path/to/package/package_name-version.pkg.tar.xz
 #+END_SRC
 * Unix
+** RSS in command line                                                  :rss:
+- https://www.youtube.com/watch?v=cpSKsQ2CdAU
+#+BEGIN_HTML
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cpSKsQ2CdAU" frameborder="0" allowfullscreen></iframe>
+#+END_HTML
 
+- Newsbeuter
+#+BEGIN_EXAMPLE
+- SEARCH: <backslash> /
+- TAGS: <url> tag1 "many words tag"
+  - use 't' to enter TAGS
+  - use 'C-t' to exit TAGS
+- use 'o' to open link to browser
+- rename feed: "~NEW-NAME"
+#+END_EXAMPLE
 ** Create a =gif= from =pdf=                                      :unix:bash:
    :PROPERTIES:
    :DATE:     28-09-2015
@@ -212,6 +226,11 @@ A hi-tech device for gesture recognition.  They refer to /gesture archetypes/.
 *** Haten @ Cyber Semiotic Institute                           :music:course:
 Notes of his class online.
 - http://projects.chass.utoronto.ca/semiotics/cyber/hatout.html
+** Music podcasts                                             :music:podcast:
+*** Tod Machover
+- https://www.loc.gov/podcasts/musicandthebrain/podcast_machover.html
+*** Ge Wang
+- https://www.loc.gov/today/cyberlc/feature_wdesc.php?rec=6304
 ** Music videos                                                :music:videos:
 - CIRMMT channel on youtube: https://www.youtube.com/channel/UC8RzG5Iug2XKANPZ_XUea5A
 * Orgmode                                                           :orgmode:
@@ -425,3 +444,6 @@ Based on =beamerposter= package.
 * GPG key
 ** Update expired key
 - http://www.g-loaded.eu/2010/11/01/change-expiration-date-gpg-key/
+* Perception
+** Color perception
+- http://web.mit.edu/bcs/nklab/what_color_is_the_dress.shtml
